@@ -2,12 +2,10 @@
 // @id             iitc-plugin-bookmarkstore
 // @name           IITC plugin: bookmarkstore
 // @category       Info
-// @version        0.0.1.20160708.1413
+// @version        0.0.1.20160708.1425
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
-// @updateURL      https://github.com/Hurqalia/bookmarkstore/raw/master/bookmarkstore.meta.js
-// @downloadURL    https://github.com/Hurqalia/bookmarkstore/raw/master/bookmarkstore.user.js
-// @installURL     https://github.com/Hurqalia/bookmarkstore/raw/master/bookmarkstore.user.js
-// @description    [2016-07-08-1413] bookmarkstore
+// @downloadURL    https://github.com/Jormund/bookmarkstore/raw/master/bookmarkstore.user.js
+// @description    [2016-07-08-1425] bookmarkstore
 // @include        https://www.ingress.com/intel*
 // @include        http://www.ingress.com/intel*
 // @match          https://www.ingress.com/intel*
