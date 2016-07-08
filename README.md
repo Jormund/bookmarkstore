@@ -1,1 +1,1 @@
-# IITC Plugin : Bookmarkstore
+# IITC Plugin : Bookmark Store
