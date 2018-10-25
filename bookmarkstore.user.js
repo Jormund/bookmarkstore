@@ -2,11 +2,11 @@
 // @id             iitc-plugin-bookmarkstore
 // @name           IITC plugin: bookmarkstore
 // @category       Info
-// @version        0.1.0.20181025.2000
+// @version        0.1.0.20181025.2210
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
 // @updateURL      https://cdn.rawgit.com/Jormund/bookmarkstore/master/bookmarkstore.meta.js
 // @downloadURL    https://cdn.rawgit.com/Jormund/bookmarkstore/master/bookmarkstore.user.js
-// @description    [2018-10-25-2000] Bookmarkstore
+// @description    [2018-10-25-2210] Bookmarkstore
 // @include        https://ingress.com/intel*
 // @include        http://ingress.com/intel*
 // @include        https://*.ingress.com/intel*
@@ -189,6 +189,11 @@ function wrapper(plugin_info) {
 			});
 		}
 	}
+	window.plugin.bookmarkstore.optExport = function() {
+		if(typeof android !== 'undefined' && android && android.saveFile) {
+		  android.saveFile("IITC-bookmarkstore.json", "application/json", localStorage[window.plugin.bookmarkstore.KEY_STORAGE]);
+		}
+	}
 
 	// import bookmarks via paste
 	window.plugin.bookmarkstore.optPaste = function() {
@@ -207,6 +212,24 @@ function wrapper(plugin_info) {
         window.plugin.bookmarks.optAlert('<span style="color: #f88">Import failed </span>');
 			}
 		}
+	}
+	
+	window.plugin.bookmarkstore.optImport = function() {
+    if (window.requestFile === undefined) return;
+    window.requestFile(function(filename, content) {
+      try {
+        JSON.parse(content); // try to parse JSON first
+        localStorage[window.plugin.bookmarkstore.KEY_STORAGE] = promptAction;
+        //window.plugin.bookmarks.refreshBkmrks();//do not clear or change current bookmarks, user might want to add them to the store
+		window.plugin.bookmarkstore.refreshMenu();//we do refresh the dropdownlist
+        //window.runHooks('pluginBkmrksEdit', {"target": "all", "action": "import"});
+        console.log('BOOKMARKSTORE: reset and imported bookmarks');
+        window.plugin.bookmarks.optAlert('Successful. ');
+      } catch(e) {
+        console.warn('BOOKMARKS: failed to import data: '+e);
+        window.plugin.bookmarks.optAlert('<span style="color: #f88">Import failed </span>');
+			}
+		});
 	}
 
     // init setup
@@ -247,11 +270,10 @@ function wrapper(plugin_info) {
 		actions += '<a onclick="window.plugin.bookmarkstore.optCopy();return false;">Copy bookmarkstore</a>';
 		actions += '<a onclick="window.plugin.bookmarkstore.optPaste();return false;">Paste bookmarkstore</a>';
 		
-		//TODO: add file import/export ?
-		// if(plugin.bookmarks.isAndroid()) {
-		  // actions += '<a onclick="window.plugin.bookmarks.optImport();return false;">Import bookmarks</a>';
-		  // actions += '<a onclick="window.plugin.bookmarks.optExport();return false;">Export bookmarks</a>';
-		// }
+		if(window.plugin.bookmarks.isAndroid()) {
+		  actions += '<a onclick="window.plugin.bookmarkstore.optImport();return false;">Import bookmarkstore</a>';
+		  actions += '<a onclick="window.plugin.bookmarkstore.optExport();return false;">Export bookmarkstore</a>';
+		}
 		window.plugin.bookmarkstore.htmlSetbox = '<div id="bkmrkstoreSetbox">' + actions + '</div>';
 		
         $('#toolbox').after('<div id="bookmarkstore-toolbox" style="padding:3px;"></div>');
