@@ -2,25 +2,21 @@
 // @id             iitc-plugin-bookmarkstore
 // @name           IITC plugin: bookmarkstore
 // @category       Info
-// @version        0.1.1.20181207.1909
+// @version        1.0.0.20221113.2221
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
 // @updateURL      https://raw.githubusercontent.com/Jormund/bookmarkstore/master/bookmarkstore.meta.js
 // @downloadURL    https://raw.githubusercontent.com/Jormund/bookmarkstore/master/bookmarkstore.user.js
-// @description    [2018-12-07-1909] Bookmarkstore
-// @include        https://ingress.com/intel*
-// @include        http://ingress.com/intel*
+// @description    [2022-11-13-2221] Bookmarkstore
 // @include        https://*.ingress.com/intel*
-// @include        http://*.ingress.com/intel*
 // @include        https://intel.ingress.com/*
 // @match          https://intel.ingress.com/*
 // @match          https://*.ingress.com/intel*
-// @match          http://*.ingress.com/intel*
 // @grant          none
 // ==/UserScript==
-/*
-	0.1.1	Activate on intel.ingress.com, changed download url to github
-	0.1.0	Added Opt menu with Import/Export buttons
-*/
+//Changelog
+//1.0.0: Activate on intel-x.ingress.com
+//0.1.1: Activate on intel.ingress.com, changed download url to github
+//0.1.0: Added Opt menu with Import / Export buttons
 
 function wrapper(plugin_info) {
     if (typeof window.plugin !== 'function') window.plugin = function () { };
